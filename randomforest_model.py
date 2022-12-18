@@ -72,7 +72,7 @@ def test_time_data(clf, target, features, n_instances, timeframe, filename, cv=1
 
 def get_participant_ids(filename, encoding='latin1'):
     """
-    Reads the file, returns list oft every unique participant 
+    Reads the file, returns list of every unique participant 
     """
     dataset = read_csv(filename, encoding = encoding)
     participant_ids = dataset['label'].unique()
@@ -99,7 +99,8 @@ def individual_scoring_4_instances(clf, target, features, n_instances, filename,
 
 
 def individual_scoring_4_seconds(clf, target, features, n_instances, timeframe, filename, cv=10):
-    datafile = "final_test_data_v2_{}seconds.csv".format(timeframe)
+    #datafile = "final_test_data_v2_{}seconds.csv".format(timeframe)
+    datafile = "final_test_data_v3_{}seconds.csv".format(timeframe)
     participants = get_participant_ids(datafile)
 
     total_score = 0
@@ -123,7 +124,7 @@ def main():
     n_instances_list = [1, 2, 5, 10, 20]
     n_instances_list = []
     timeframe_list = [(41, 60), (52, 120), (80, 300), (99, 600), (148, 1200)]
-    timeframe_list = [(148, 1200)]
+    timeframe_list = [(41, 60)]
 
     instance_file = 'instance_scores_final.txt'
     second_file = 'second_scores_final.txt'
@@ -135,8 +136,8 @@ def main():
     for n_ins in n_instances_list:
         test_instance_data(clf, target, starting_fieldnames, n_ins, instance_file)
     
-    #for time in timeframe_list:
-    #    test_time_data(clf, target, starting_fieldnames, time[0], time[1], second_file)
+    for time in timeframe_list:
+        test_time_data(clf, target, starting_fieldnames, time[0], time[1], second_file)
 
     #for n_ins in n_instances_list:
     #    individual_scoring_4_instances(clf, target, starting_fieldnames, n_ins, ind_instance_file, cv=10)
