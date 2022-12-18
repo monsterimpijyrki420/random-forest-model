@@ -74,7 +74,8 @@ def empty_feature_filler(row, n_instances):
     extra_instances = n_instances - intances_already
     for n in range(int(extra_instances)):
         division = n_instances - n
-        row['category_{}'.format(division)] = 'NOT_AVAILABLE'
+        ######################################################################################## not available oli auki
+        #row['category_{}'.format(division)] = 'NOT_AVAILABLE'
         #row['usage_time_{}'.format(division)] = -1 #testaa vaik kaikkea
         #row['time_since_original_app_{}'.format(division)] = -1
         #row['hour_of_the_day_{}'.format(division)] = -1 #?
@@ -144,6 +145,7 @@ def main():
     #dataset = dataset.loc[dataset['label']=='P1'].reset_index(drop=True)
 
     amount_of_instances = [1, 2, 5, 10, 20]
+    amount_of_instances = []
 
     for n in amount_of_instances:
         filename = "final_test_data_{}{}.csv".format(n, 'instances')
@@ -151,10 +153,12 @@ def main():
 
     timeframes = [60, 120, 300, 600, 1200]
     instances_in_tf = [41, 52, 80, 148]
+    timeframes = [60]
+    instances_in_tf = [41]
 
     iterator = 0
     for n_ins in instances_in_tf:
-        filename = "final_test_data_v2_{}{}.csv".format(timeframes[iterator], 'seconds')
+        filename = "final_test_data_v3_{}{}.csv".format(timeframes[iterator], 'seconds')
         write_data(dataset, n_ins, filename, timeframes[iterator]*1000)
         iterator = iterator + 1
 

@@ -71,25 +71,21 @@ def new_data_writer(writer, line, saved_data):
     is_weekend = weekend_finder(line)
     last_c, most_common_c, time_since_last_app = get_saved_data(line, saved_data)
 
-    writer.writerow({'label': line['label'], 'usage_time': line['usage_time'], 'last_category': last_c, 'time_since_last_app': time_since_last_app,'most_used_category_in_5_inst': most_common_c, 'hour_of_the_day': hour, 'is_weekend': is_weekend,'category': line['category'], 'app_name': line['application_name']})
+    writer.writerow({'label': line['label'], 'usage_time': line['usage_time'], 'last_category': last_c, 'time_since_last_app': time_since_last_app,'most_used_category': most_common_c, 'hour_of_the_day': hour, 'is_weekend': is_weekend,'category': line['category'], 'app_name': line['application_name']})
 
 
 if __name__ == "__main__":
     with open('app_with_category.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
 
-        with open('test_data1.csv', 'w', newline='') as csvfile:
-            fieldnames = ['label', 'hour_of_the_day', 'usage_time', 'last_category', 'time_since_last_app', 'most_used_category_in_5_inst', 'is_weekend', 'category', 'app_name']
+        with open('testfilupois.csv', 'w', newline='') as csvfile:
+            fieldnames = ['label', 'hour_of_the_day', 'usage_time', 'last_category', 'time_since_last_app', 'most_used_category', 'is_weekend', 'category', 'app_name']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             saved_data = reset_saved_data('P1')
-            while True:
-                try:
-                    line = reader.__next__()
-                    if line['label'] == "P4":
-                        break
-                except StopIteration:
-                    break
+            for line in reader.__iter__():
+                #if line['label'] == "P4":
+                #    break
                 if line['category'] != 'OTHER':
                     if line['label'] != saved_data["current_label"]:
                         saved_data = reset_saved_data(line['label'])
