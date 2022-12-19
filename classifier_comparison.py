@@ -7,7 +7,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression
-#from sklearn.svm import SVC
 
 
 def read_data(filename, target, features, encoding='latin1'):
@@ -37,7 +36,6 @@ def score_writer(clf, X, y, filename):
 
 def main():
     datafile = 'algorithm_test_data.csv'
-    #datafile = 'test_data0.csv'
     target = 'category'
     features = ['hour_of_the_day','usage_time','last_category','time_since_last_app', 'is_weekend']
 
@@ -48,16 +46,9 @@ def main():
     J48 = DecisionTreeClassifier(max_depth=7, random_state=0)
     KNN = KNeighborsClassifier(n_neighbors=300, p=1)
     MLP = MLPClassifier()
-    LR = LogisticRegression(solver='sag', max_iter=85)
-    LR1 = LogisticRegression(solver='sag', max_iter=155)
-    LR2 = LogisticRegression(solver='sag', max_iter=125)
     LR3 = LogisticRegression(solver='sag', max_iter=100)
-    LR4 = LogisticRegression(solver='sag', max_iter=200)
-    LR5 = LogisticRegression(solver='sag', max_iter=400)
-    LR6 = LogisticRegression(solver='sag', max_iter=550)
     #SVM = SVC()
-    list_of_clfs = [RF, J48, KNN, MLP]#, SVM]
-    list_of_clfs = [LR, LR1, LR2, LR3, LR4, LR5, LR6]
+    list_of_clfs = [RF, J48, KNN, MLP]
 
     #resets the txt file
     filename = 'test_scores.txt'
